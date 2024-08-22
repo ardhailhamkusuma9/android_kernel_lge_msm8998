@@ -67,6 +67,7 @@ Module.symvers
 #
 !.gitignore
 !.mailmap
+!.gitmodules
 
 #
 # Generated include files
@@ -124,3 +125,6 @@ android/configs/android-*.cfg
 #Ignoring Android.bp link file
 #
 Android.bp
+
+# Ignore out folder
+/out/
