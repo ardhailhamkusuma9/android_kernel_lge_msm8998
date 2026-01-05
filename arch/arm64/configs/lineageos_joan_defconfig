@@ -1,4 +1,5 @@
 CONFIG_LOCALVERSION="-perf"
+CONFIG_CMDLINE="androidboot.hardware=joan user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1 swiotlb=2048 androidboot.configfs=true androidboot.usbcontroller=a800000.dwc3 loop.max_part=7 androidboot.fstab_suffix=qcom androidboot.boot_devices=soc/1da4000.ufshc"
 # CONFIG_LOCALVERSION_AUTO is not set
 # CONFIG_USELIB is not set
 CONFIG_AUDIT=y
@@ -35,7 +36,7 @@ CONFIG_BLK_DEV_INITRD=y
 # CONFIG_RD_XZ is not set
 # CONFIG_RD_LZO is not set
 # CONFIG_RD_LZ4 is not set
-CONFIG_CC_OPTIMIZE_FOR_SIZE=y
+CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE=y
 CONFIG_KALLSYMS_ALL=y
 CONFIG_BPF_SYSCALL=y
 # CONFIG_MEMBARRIER is not set
@@ -727,3 +728,11 @@ CONFIG_CRYPTO_AES_ARM64_CE_BLK=y
 CONFIG_CRYPTO_AES_ARM64_NEON_BLK=y
 CONFIG_CRYPTO_CRC32_ARM64=y
 CONFIG_QMI_ENCDEC=y
+
+# KernelSU
+CONFIG_KSU=y
+CONFIG_KPM=n
+CONFIG_KSU_MANUAL_HOOK=y
+CONFIG_KSU_MANUAL_SU=n
+CONFIG_KSU_SYSCALL_HOOK=n
+CONFIG_TMPFS_XATTR=y
