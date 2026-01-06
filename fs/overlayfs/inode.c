@@ -78,9 +78,15 @@ out:
 }
 
 static int ovl_getattr(struct vfsmount *mnt, struct dentry *dentry,
-			 struct kstat *stat)
+					   struct kstat *stat)
 {
 	struct path realpath;
+
+#ifdef CONFIG_KSU_SUSFS_SUS_OVERLAYFS
+	struct dentry *lower_dentry = ovl_dentry_lower(dentry);
+	if (lower_dentry) {
+	}
+#endif
 
 	ovl_path_real(dentry, &realpath);
 	return vfs_getattr(&realpath, stat);
