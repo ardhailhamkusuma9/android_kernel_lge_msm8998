@@ -2,6 +2,11 @@
 #include <linux/init.h>
 #include <linux/proc_fs.h>
 #include <linux/seq_file.h>
+
+#ifdef CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG
+extern int susfs_spoof_cmdline_or_bootconfig(struct seq_file *m);
+#endif
+
 #include <asm/setup.h>
 #include <soc/qcom/lge/board_lge.h>
 #include <linux/slab.h>
@@ -29,6 +34,14 @@ static void proc_cmdline_set(char *name, char *value)
 
 static int cmdline_proc_show(struct seq_file *m, void *v)
 {
+
+#ifdef CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG
+	if (!susfs_spoof_cmdline_or_bootconfig(m)) {
+		seq_putc(m, '\n');
+		return 0;
+	}
+#endif
+
 #ifdef CONFIG_MACH_LGE
 	if (lge_get_boot_mode() == LGE_BOOT_MODE_CHARGERLOGO) {
 		proc_cmdline_set("androidboot.mode", "charger");
