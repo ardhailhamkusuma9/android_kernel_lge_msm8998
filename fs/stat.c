@@ -365,7 +365,9 @@ SYSCALL_DEFINE2(newfstat, unsigned int, fd, struct stat __user *, statbuf)
 	if (!error)
 		error = cp_new_stat(&stat, statbuf);
 
+	#ifdef CONFIG_KSU_SUSFS
 	ksu_handle_newfstat_ret(&fd, &statbuf);
+#endif
 	return error;
 }
 
