@@ -105,7 +105,7 @@ extern struct static_key_true ksu_is_init_rc_hook_enabled;
 extern void ksu_handle_vfs_fstat(int fd, loff_t *kstat_size_ptr);
 #endif // #ifdef CONFIG_KSU_SUSFS
 
-int vfs_fstat(unsigned int fd, struct kstat *stat)
+int vfs_fstat(unsigned int fd, struct kstat
 {
 	struct fd f = fdget_raw(fd);
 	int error = -EBADF;
