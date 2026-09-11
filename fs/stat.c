@@ -138,7 +138,7 @@ int vfs_fstatat(int dfd, const char __user *filename, struct kstat *stat,
 	int error = -EINVAL;
 	unsigned int lookup_flags = 0;
 
-##ifdef CONFIG_KSU_SUSFS
+#ifdef CONFIG_KSU_SUSFS
 	if (likely(susfs_is_current_proc_umounted()))
 		goto orig_flow;
 	if (static_branch_likely(&ksu_su_compat_enabled)) {
@@ -368,9 +368,6 @@ SYSCALL_DEFINE2(newfstat, unsigned int, fd, struct stat __user *, statbuf)
 	if (!error)
 		error = cp_new_stat(&stat, statbuf);
 
-	#ifdef CONFIG_KSU_SUSFS
-	ksu_handle_newfstat_ret(&fd, &statbuf);
-#endif
 	return error;
 }
 
@@ -489,7 +486,6 @@ SYSCALL_DEFINE2(fstat64, unsigned long, fd, struct stat64 __user *, statbuf)
 	if (!error)
 		error = cp_new_stat64(&stat, statbuf);
 
-	ksu_handle_fstat64_ret(&fd, &statbuf);
 	return error;
 }
 
