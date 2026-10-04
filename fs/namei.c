@@ -5008,4 +5008,5 @@ const struct inode_operations page_symlink_inode_operations = {
 	.put_link	= page_put_link,
 };
 EXPORT_SYMBOL(page_symlink_inode_operations);
-nk_inode_operations);
+
+k_inode_operations);
