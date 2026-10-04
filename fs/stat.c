@@ -72,6 +72,8 @@ int vfs_getattr_nosec(struct path *path, struct kstat *stat)
 		}
 	}
 #endif // #ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
+
+#ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
 	if (inode->i_op->getattr) {
 #else
 	if (inode->i_op->getattr)
