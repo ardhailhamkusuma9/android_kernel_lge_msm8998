@@ -35,7 +35,6 @@
 #include <linux/fs_struct.h>
 #include <linux/posix_acl.h>
 #include <linux/hash.h>
-#include <linux/init_task.h>
 #include <asm/uaccess.h>
 #if defined(CONFIG_KSU_SUSFS_SUS_PATH) || defined(CONFIG_KSU_SUSFS_OPEN_REDIRECT)
 #include <linux/susfs_def.h>
@@ -2376,7 +2375,7 @@ static int path_lookupat(struct nameidata *nd, unsigned flags, struct path *path
 }
 
 int filename_lookup(int dfd, struct filename *name, unsigned flags,
-			   struct path *path, struct path *root)
+		    struct path *path, struct path *root)
 {
 	int retval;
 	struct nameidata nd;
@@ -3258,8 +3257,8 @@ static int do_last(struct nameidata *nd,
 		   int *opened)
 {
 	struct dentry *dir = nd->path.dentry;
-	kuid_t dir_uid = nd->inode->i_uid;
-	umode_t dir_mode = nd->inode->i_mode;
+	kuid_t dir_uid = dir->d_inode->i_uid;
+	umode_t dir_mode = dir->d_inode->i_mode;
 	int open_flag = op->open_flag;
 	bool will_truncate = (open_flag & O_TRUNC) != 0;
 	bool got_write = false;
@@ -3653,7 +3652,7 @@ out2:
 		put_filp(file);
 	}
 #ifdef CONFIG_KSU_SUSFS_OPEN_REDIRECT
-if (fake_filename && !IS_ERR(fake_filename)) {
+	if (fake_filename && !IS_ERR(fake_filename)) {
 		nd->name = old_name;
 		putname(fake_filename);
 	}
@@ -5009,3 +5008,4 @@ const struct inode_operations page_symlink_inode_operations = {
 	.put_link	= page_put_link,
 };
 EXPORT_SYMBOL(page_symlink_inode_operations);
+nk_inode_operations);
